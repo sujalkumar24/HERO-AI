@@ -1,5 +1,9 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
 import { defineConfig } from "prisma/config";
+
+// Load environment variables from root .Env file
+dotenv.config({ path: path.resolve(__dirname, '../.Env') });
 
 export default defineConfig({
   schema: 'prisma/schema.prisma',
@@ -7,10 +11,9 @@ export default defineConfig({
     path: 'prisma/migrations',
     seed: 'tsx prisma/db/seed.ts',
   },
-  datasource: {
-    url:
-      process.env.DIRECT_URL ||
-      process.env.DATABASE_URL ||
-      "postgresql://Adminowner:npg_iTOKDBUM9g4x@ep-late-forest-ahbp2t3r.c-3.us-east-1.aws.neon.tech/HEROAI?sslmode=require",
+datasource: {
+    // Use DATABASE_URL for both runtime and migrations (PgBouncer on port 6543)
+    // Use port 5432 only if DIRECT_URL specifically points to it and is accessible
+    url: process.env.DATABASE_URL,
   },
 });

@@ -10,7 +10,6 @@ export default defineConfig({
   datasource: {
     url:
       process.env.DIRECT_URL ||
-      process.env.DATABASE_URL ||
-      "postgresql://Adminowner:npg_iTOKDBUM9g4x@ep-late-forest-ahbp2t3r.c-3.us-east-1.aws.neon.tech/HEROAI?sslmode=require",
+      process.env.DATABASE_URL,
   },
 });
